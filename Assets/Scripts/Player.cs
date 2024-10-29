@@ -13,6 +13,13 @@ public class Player : LivingEntity
     PlayerController controller;
     GunController gunController;
 
+        // Dashing skill variables
+    public float dashSpeed = 15f; 
+    public float dashDuration = 0.2f; 
+    private float dashTime;
+    private bool isDashing; 
+
+
     protected override void Start()
     {
         base.Start();
@@ -33,22 +40,37 @@ public class Player : LivingEntity
         Debug.Log("OnNewWave called with waveNumber: " + waveNumber); // Debug statement
     }
 
-    void Update()
+     void Update() 
     {
-        // Movement input
+        // Regular movement input
         Vector3 moveInput = new Vector3(
             Input.GetAxisRaw("Horizontal"),
             0,
             Input.GetAxisRaw("Vertical")
         );
-        if (moveInput != Vector3.zero)
+
+        if (Input.GetKeyDown(KeyCode.F) && !isDashing)
         {
-            Vector3 moveVelocity = moveInput.normalized * moveSpeed;
-            controller.Move(moveVelocity);
+            isDashing = true;
+            dashTime = Time.time;
+        }
+
+        if (isDashing)
+        {
+            if (Time.time - dashTime < dashDuration) 
+            {
+                Vector3 dashVelocity = moveInput.normalized * dashSpeed; 
+                controller.Move(dashVelocity); 
+            }
+            else
+            {
+                isDashing = false;
+            }
         }
         else
         {
-            controller.Move(Vector3.zero);
+            Vector3 moveVelocity = moveInput.normalized * moveSpeed;
+            controller.Move(moveVelocity);
         }
 
         // Look input
@@ -59,16 +81,10 @@ public class Player : LivingEntity
         if (groundPlane.Raycast(ray, out rayDistance))
         {
             Vector3 point = ray.GetPoint(rayDistance);
-            //Debug.DrawLine(ray.origin,point,Color.red);
             controller.LookAt(point);
             crosshair.transform.position = point;
             crosshair.DetectTargets(ray);
-            if (
-                (
-                    new Vector2(point.x, point.z)
-                    - new Vector2(transform.position.x, transform.position.z)
-                ).sqrMagnitude > 1
-            )
+            if ((new Vector2(point.x, point.z) - new Vector2(transform.position.x, transform.position.z)).sqrMagnitude > 1)
             {
                 gunController.Aim(point);
             }
@@ -94,9 +110,11 @@ public class Player : LivingEntity
             gunController.SwitchWeapon();
         }
 
-        if (transform.position.y < -5) {
-			TakeDamage (health);
-		}
+        // Check if player falls out of bounds
+        if (transform.position.y < -5) 
+        {
+            TakeDamage(health); // Causes the player to die if out of bounds
+        }
     }
 
     //player die

@@ -30,13 +30,11 @@ public class GameUI : MonoBehaviour
     {
         if (scoreUI != null)
         {
-            //maintain 6 digit score
             scoreUI.text = ScoreKeeper.score.ToString("D6");
         }
         float healthPercent = 0;
         if (player != null)
         {
-            //maintain health bar
             healthPercent = player.health / player.startingHealth;
         }
         healthBar.localScale = new Vector3(healthPercent, 1, 1);
