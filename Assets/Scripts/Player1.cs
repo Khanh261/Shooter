@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(GunController))]
-public class Player : LivingEntity
+public class Player1 : LivingEntity
 {
     public float moveSpeed = 5;
 
@@ -40,9 +40,9 @@ public class Player : LivingEntity
     {
         // Regular movement input
         Vector3 moveInput = new Vector3(
-            Input.GetAxisRaw("Horizontal"),
+            Input.GetAxisRaw("Horizontal2"),
             0,
-            Input.GetAxisRaw("Vertical")
+            Input.GetAxisRaw("Vertical2")
         );
 
         if (Input.GetKeyDown(KeyCode.F) && !isDashing)
@@ -69,27 +69,17 @@ public class Player : LivingEntity
             controller.Move(moveVelocity);
         }
 
-        // Look input and aiming
-        Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.up * gunController.GunHeight);
-        float rayDistance;
-
-        if (groundPlane.Raycast(ray, out rayDistance))
-        {
-            Vector3 point = ray.GetPoint(rayDistance);
-            controller.LookAt(point);
-            if ((new Vector2(point.x, point.z) - new Vector2(transform.position.x, transform.position.z)).sqrMagnitude > 1)
-            {
-                gunController.Aim(point);
-            }
-        }
+        // Aim in the direction of movement or default forward direction
+        Vector3 aimDirection = moveInput != Vector3.zero ? moveInput : transform.forward;
+        controller.LookAt(transform.position + aimDirection);
+        gunController.Aim(transform.position + aimDirection);
 
         // Weapon input
-        if (Input.GetMouseButton(0))
+        if (Input.GetKey(KeyCode.M))
         {
             gunController.OnTriggerHold();
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetKeyUp(KeyCode.M))
         {
             gunController.OnTriggerRelease();
         }

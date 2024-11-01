@@ -30,7 +30,6 @@ public class GunController : MonoBehaviour
         {
             currentWeaponIndex = weaponIndex;
             EquipGun(allGuns[currentWeaponIndex]);
-            Debug.Log("Equipping gun with weaponIndex: " + weaponIndex);
         }
     }
 
@@ -41,8 +40,6 @@ public class GunController : MonoBehaviour
         equippedGuns.Add(newGun);
         gunNameText.text = newGun.name;
         StartCoroutine(HideGunNameText());
-
-        Debug.Log("Equipped gun: " + newGun.name);
 
         foreach (Gun gun in equippedGuns)
         {

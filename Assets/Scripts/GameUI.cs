@@ -28,10 +28,7 @@ public class GameUI : MonoBehaviour
 
     void Update()
     {
-        if (scoreUI != null)
-        {
-            scoreUI.text = ScoreKeeper.score.ToString("D6");
-        }
+        scoreUI.text = ScoreKeeper.score.ToString("D6");
         float healthPercent = 0;
         if (player != null)
         {

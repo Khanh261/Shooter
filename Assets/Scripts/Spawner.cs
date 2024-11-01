@@ -9,6 +9,8 @@ public class Spawner : MonoBehaviour
     public Wave[] waves;
     public Enemy enemy;
     public RangedEnemy rangedEnemy;
+    public GameObject healthItemPrefab;
+
 
     LivingEntity playerEntity;
     Transform playerT;
@@ -89,7 +91,6 @@ public class Spawner : MonoBehaviour
     {
         if (currentWaveNumber >= waves.Length)
         {
-            Debug.Log("All waves completed!");
             isDisabled = true;
         }
         else
@@ -145,6 +146,12 @@ public class Spawner : MonoBehaviour
                 currentWave.projectileSpeed,
                 currentWave.attackRange
             );
+
+            // Drop health item if it's a ranged enemy
+            if (healthItemPrefab != null)
+            {
+                Instantiate(healthItemPrefab, spawnTile.position, Quaternion.identity);
+            }
         }
         else
         {

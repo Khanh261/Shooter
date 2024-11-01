@@ -21,7 +21,6 @@ public class LivingEntity : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float damage)
     {
-        Debug.Log("Enemy took damage");
 
         health -= damage;
         if (health <= 0 && !dead)

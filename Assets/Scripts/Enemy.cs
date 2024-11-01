@@ -48,6 +48,14 @@ public class Enemy : LivingEntity
 
             myCollisionRadius = GetComponent<CapsuleCollider>().radius;
             targetCollisionRadius = target.GetComponent<CapsuleCollider>().radius;
+        }else if  (GameObject.FindGameObjectWithTag("Player2") != null){
+            hasTarget = true;
+
+            target = GameObject.FindGameObjectWithTag("Player2").transform;
+            targetEntity = target.GetComponent<LivingEntity>();
+
+            myCollisionRadius = GetComponent<CapsuleCollider>().radius;
+            targetCollisionRadius = target.GetComponent<CapsuleCollider>().radius;
         }
         skinMaterial = GetComponent<Renderer>().material;
         originalColour = skinMaterial.color;
@@ -90,6 +98,7 @@ public class Enemy : LivingEntity
     {
         currentState = State.Idle;
         target = null;
+        
     }
 
     void Update()
