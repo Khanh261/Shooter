@@ -1,10 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(GunController))]
-public class Player1 : LivingEntity
+public class PlayerTwo : LivingEntity
 {
     public float moveSpeed = 5;
 
@@ -71,8 +71,12 @@ public class Player1 : LivingEntity
 
         // Aim in the direction of movement or default forward direction
         Vector3 aimDirection = moveInput != Vector3.zero ? moveInput : transform.forward;
-        controller.LookAt(transform.position + aimDirection);
-        gunController.Aim(transform.position + aimDirection);
+        
+        if(aimDirection != Vector3.zero)
+        {
+            controller.LookAt(transform.position + aimDirection);
+        }
+        //gunController.Aim(transform.position + aimDirection);
 
         // Weapon input
         if (Input.GetKey(KeyCode.M))

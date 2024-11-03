@@ -102,9 +102,9 @@ public class Gun : MonoBehaviour
 
             Instantiate(shell, shellEjection.position, shellEjection.rotation);
             muzzleflash.Activate();
-            transform.localPosition -= Vector3.forward * Random.Range(kickMinMax.x, kickMinMax.y);
-            recoilAngle += Random.Range(recoilAngleMinMax.x, recoilAngleMinMax.y);
-            recoilAngle = Mathf.Clamp(recoilAngle, 0, 30);
+            //transform.localPosition -= Vector3.forward * Random.Range(kickMinMax.x, kickMinMax.y);
+            //recoilAngle += Random.Range(recoilAngleMinMax.x, recoilAngleMinMax.y);
+            //recoilAngle = Mathf.Clamp(recoilAngle, 0, 30);
 
             AudioManager.instance.PlaySound(shootAudio, transform.position);
         }

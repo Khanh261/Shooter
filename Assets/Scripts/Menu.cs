@@ -37,6 +37,11 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    public void PlayMode2Players()
+    {
+        SceneManager.LoadScene("GameMode2Players");
+    }
+
     public void Quit()
     {
         Application.Quit();

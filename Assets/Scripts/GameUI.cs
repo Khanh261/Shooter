@@ -16,19 +16,29 @@ public class GameUI : MonoBehaviour
     public TextMeshProUGUI scoreUI;
     public TextMeshProUGUI gameOverScoreUI;
     public RectTransform healthBar;
+    public RectTransform healthBarPlayerTwo;
 
     Spawner spawner;
     Player player;
+    PlayerTwo playerTwo;
 
     void Start()
     {
         player = FindObjectOfType<Player>();
+        playerTwo = FindObjectOfType<PlayerTwo>();
         FindObjectOfType<Player>().OnDeath += OnGameOver;
+        FindObjectOfType<PlayerTwo>().OnDeath += OnGameOver;
     }
 
     void Update()
     {
         scoreUI.text = ScoreKeeper.score.ToString("D6");
+        CalculateAndSetHealthUI(player, healthBar);
+        CalculateAndSetHealthUI(playerTwo, healthBarPlayerTwo);
+    }
+
+    void CalculateAndSetHealthUI(LivingEntity player, RectTransform healthBar)
+    {
         float healthPercent = 0;
         if (player != null)
         {

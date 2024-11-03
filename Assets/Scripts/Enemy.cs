@@ -39,19 +39,14 @@ public class Enemy : LivingEntity
     {
         pathfinder = GetComponent<NavMeshAgent>();
 
-        if (GameObject.FindGameObjectWithTag("Player") != null)
+        string[] playerTags = { "Player", "Player2" };
+        string followPlayerTag = playerTags[Random.Range(0, playerTags.Length)];
+
+        if (GameObject.FindGameObjectWithTag(followPlayerTag) != null)
         {
             hasTarget = true;
 
-            target = GameObject.FindGameObjectWithTag("Player").transform;
-            targetEntity = target.GetComponent<LivingEntity>();
-
-            myCollisionRadius = GetComponent<CapsuleCollider>().radius;
-            targetCollisionRadius = target.GetComponent<CapsuleCollider>().radius;
-        }else if  (GameObject.FindGameObjectWithTag("Player2") != null){
-            hasTarget = true;
-
-            target = GameObject.FindGameObjectWithTag("Player2").transform;
+            target = GameObject.FindGameObjectWithTag(followPlayerTag).transform;
             targetEntity = target.GetComponent<LivingEntity>();
 
             myCollisionRadius = GetComponent<CapsuleCollider>().radius;
