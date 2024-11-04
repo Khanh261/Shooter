@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 3392
   trailColour: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 0}
   damage: 0.2
   hitEffectPrefab: {fileID: 4133231715697851366, guid: 1fa1b37555e624a42b316b0479238c24,

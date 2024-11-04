@@ -7581,7 +7581,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170095594}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -54147,6 +54147,7 @@ MonoBehaviour:
   gameOverScoreUI: {fileID: 407994040}
   healthBar: {fileID: 558855619}
   healthBarPlayerTwo: {fileID: 1650871921}
+  winnerUI: {fileID: 1881691599}
 --- !u!1 &1058398798
 GameObject:
   m_ObjectHideFlags: 0
@@ -60800,7 +60801,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215004860}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2

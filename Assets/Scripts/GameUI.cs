@@ -17,6 +17,7 @@ public class GameUI : MonoBehaviour
     public TextMeshProUGUI gameOverScoreUI;
     public RectTransform healthBar;
     public RectTransform healthBarPlayerTwo;
+    public TextMeshProUGUI winnerUI;
 
     Spawner spawner;
     Player player;
@@ -70,6 +71,14 @@ public class GameUI : MonoBehaviour
 
     void OnGameOver()
     {
+        if (player.health > 0)
+        {
+            winnerUI.text = "Player 1 win";
+        }
+        else
+        {
+            winnerUI.text = "Player 2 win";
+        }
         Cursor.visible = true;
         StartCoroutine(Fade(Color.clear, new Color(0, 0, 0, .95f), 1));
         gameOverScoreUI.text = scoreUI.text;
