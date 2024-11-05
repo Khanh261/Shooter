@@ -37,7 +37,7 @@ public class Spawner : MonoBehaviour
 
         map = FindObjectOfType<MapGenerator>();
         map.GenerateMap();
-        //NextWave();
+        NextWave();
     }
 
     void Update()
